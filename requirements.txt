@@ -1,3 +1,4 @@
 python-pptx
 slugify
 scipy
+natsort
