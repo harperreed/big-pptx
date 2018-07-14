@@ -47,13 +47,15 @@ class presentation_generator:
         logging.info("Grabbing slides")
         slides = natsorted(glob.glob(self.slides_path + self.slide_pattern))
 
+
         logging.info("Adding slides")
         for slide_image in slides:
             slide = prs.slides.add_slide(prs.slide_layouts[6])
             pic   = slide.shapes.add_picture(slide_image, Pt(0), Pt(0))
+            print "added slide"
 
 
-        filename = self.root_path + self.slug + "_-" + str(self.width) + "x" + str(self.height) + ".pptx"
+        filename = self.root_path + self.slug + "-" + str(self.width) + "x" + str(self.height) + ".pptx"
         logging.info("Saving PPTX: " + filename)
         prs.save(filename)
         
