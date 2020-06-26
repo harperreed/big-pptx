@@ -1,5 +1,6 @@
 
 from pptx import Presentation
+from pptx.dml.color import RGBColor
 from natsort import natsorted, ns
 from pptx.util import Pt, Inches
 import pptx
@@ -28,7 +29,7 @@ class presentation_generator:
 
     def __init__(self, presentation_name, slides_path, root_path="./", slide_pattern="slide*", width=1920, height=1080):
         self.presentation_name = presentation_name
-        self.slug = slugify(unicode(self.presentation_name))
+        self.slug = slugify((self.presentation_name))
         self.width = width
         self.height = height
         self.slides_path = slides_path
@@ -52,7 +53,11 @@ class presentation_generator:
         for slide_image in slides:
             slide = prs.slides.add_slide(prs.slide_layouts[6])
             pic   = slide.shapes.add_picture(slide_image, Pt(0), Pt(0))
-            print "added slide"
+            background = slide.background
+            fill = background.fill
+            fill.solid()
+            fill.fore_color.rgb = RGBColor(0, 177, 64) #Green screen color
+            logging.info("added slide")
 
 
         filename = self.root_path + self.slug + "-" + str(self.width) + "x" + str(self.height) + ".pptx"
